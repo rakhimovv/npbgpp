@@ -1,0 +1,67 @@
+scene_class_name: npbgplusplus.data.ColmapScene
+scene_name: scene_name
+train_num_samples: 2000
+train_random_zoom: ~ # [ 0.5, 2.0 ]
+train_random_shift: true
+train_image_size: 256
+data_root: ../../data/colmap_data
+scene_subroot: ${datasets.data_root}
+images_subroot: ${datasets.data_root}
+val_indices: [ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95 ]
+holdout_indices: [ 10, 20, 30, 40, 50, 60, 70, 80, 90 ]
+cache_images: false
+selection_count: 3  # during train
+noise_sigma: ~
+n_point: ~
+pc_name: mvs_pc.ply
+
+train:
+  - dataset_name: ${datasets.scene_name}_finetune
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}/images
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        exclude_indices: [ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 10, 20, 30, 40, 50, 60, 70, 80, 90 ]  # ${holdout_indices} + ${datasets.val_indices}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+
+val:
+  - dataset_name: ${datasets.scene_name}_val
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}/images
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.val_indices}
+        exclude_indices: ${datasets.holdout_indices}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""
+
+test:
+  - dataset_name: ${datasets.scene_name}_holdout
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}/images
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.holdout_indices}
+        exclude_indices: ${datasets.val_indices}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""

@@ -1,0 +1,163 @@
+scene_class_name: npbgplusplus.data.H3DSScene
+train_num_samples: 2000
+train_random_zoom: ~ # [ 0.5, 2.0 ]
+train_random_shift: true
+train_image_size: 256
+data_root: ../../data/H3DS
+val_indices: [ 7, 14, 21, 28 ]
+holdout_indices: [ 5, 10, 15, 20, 25, 30 ]
+cache_images: false
+selection_count: 3  # during train
+pc_name: mvs_pc.ply
+
+train:
+  - dataset_name: 1b2a8613401e42a8
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/1b2a8613401e42a8
+        images_root: ${datasets.data_root}/1b2a8613401e42a8/image
+        masks_root: ${datasets.data_root}/1b2a8613401e42a8/mask
+        pc_path: ${datasets.data_root}/1b2a8613401e42a8/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: 3b5a2eb92a501d54
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/3b5a2eb92a501d54
+        images_root: ${datasets.data_root}/3b5a2eb92a501d54/image
+        masks_root: ${datasets.data_root}/3b5a2eb92a501d54/mask
+        pc_path: ${datasets.data_root}/3b5a2eb92a501d54/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: 5cd49557ea450c89
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/5cd49557ea450c89
+        images_root: ${datasets.data_root}/5cd49557ea450c89/image
+        masks_root: ${datasets.data_root}/5cd49557ea450c89/mask
+        pc_path: ${datasets.data_root}/5cd49557ea450c89/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: 444ea0dc5e85ee0b
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/444ea0dc5e85ee0b
+        images_root: ${datasets.data_root}/444ea0dc5e85ee0b/image
+        masks_root: ${datasets.data_root}/444ea0dc5e85ee0b/mask
+        pc_path: ${datasets.data_root}/444ea0dc5e85ee0b/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: 609cc60fd416e187
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/609cc60fd416e187
+        images_root: ${datasets.data_root}/609cc60fd416e187/image
+        masks_root: ${datasets.data_root}/609cc60fd416e187/mask
+        pc_path: ${datasets.data_root}/609cc60fd416e187/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: 868765907f66fd85
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/868765907f66fd85
+        images_root: ${datasets.data_root}/868765907f66fd85/image
+        masks_root: ${datasets.data_root}/868765907f66fd85/mask
+        pc_path: ${datasets.data_root}/868765907f66fd85/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: e98bae39fad2244e
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/e98bae39fad2244e
+        images_root: ${datasets.data_root}/e98bae39fad2244e/image
+        masks_root: ${datasets.data_root}/e98bae39fad2244e/mask
+        pc_path: ${datasets.data_root}/e98bae39fad2244e/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: f7e930d8a9ff2091
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/f7e930d8a9ff2091
+        images_root: ${datasets.data_root}/f7e930d8a9ff2091/image
+        masks_root: ${datasets.data_root}/f7e930d8a9ff2091/mask
+        pc_path: ${datasets.data_root}/f7e930d8a9ff2091/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+      selection_count: ${datasets.selection_count}
+
+val:
+  - dataset_name: f7e930d8a9ff2091_val
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/f7e930d8a9ff2091
+        images_root: ${datasets.data_root}/f7e930d8a9ff2091/image
+        masks_root: ${datasets.data_root}/f7e930d8a9ff2091/mask
+        pc_path: ${datasets.data_root}/5ae021f2805c0854/${datasets.pc_name}
+        target_views_indices: ${datasets.val_indices}
+        exclude_indices: ${datasets.holdout_indices}
+      selection_method: ""
+
+test:
+  - dataset_name: 5ae021f2805c0854_holdout
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/5ae021f2805c0854
+        images_root: ${datasets.data_root}/5ae021f2805c0854/image
+        masks_root: ${datasets.data_root}/5ae021f2805c0854/mask
+        pc_path: ${datasets.data_root}/5ae021f2805c0854/${datasets.pc_name}
+        target_views_indices: ${datasets.holdout_indices}
+        exclude_indices: ${datasets.val_indices}
+      selection_method: ""

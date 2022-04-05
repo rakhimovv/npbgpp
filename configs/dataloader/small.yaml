@@ -1,0 +1,17 @@
+# each: each gpu processes its own set subset of scenes; ignored when running on cpu
+# common: all scenes are distributed across all gpus
+train_data_mode: each  # each | common
+
+train:
+  total_batch_size: 1
+  num_workers: 0
+  shuffle: true
+  pin_memory: false
+val:
+  total_batch_size: 1
+  num_workers: 0
+  pin_memory: false
+test:
+  total_batch_size: 1
+  num_workers: 0
+  pin_memory: false

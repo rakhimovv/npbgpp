@@ -1,0 +1,60 @@
+scene_class_name: npbgplusplus.data.H3DSScene
+scene_name: 5ae021f2805c0854 # 7dd427509fe84baa
+train_num_samples: 2000
+train_random_zoom: ~ # [ 0.5, 2.0 ]
+train_random_shift: true
+train_image_size: 256
+data_root: ../../data/H3DS
+val_indices: [ 7, 14, 21, 28 ]
+holdout_indices: [ 5, 10, 15, 20, 25, 30 ]
+cache_images: false
+selection_count: 3  # during train
+pc_name: mvs_pc.ply
+
+train:
+  - dataset_name: ${datasets.scene_name}_finetune
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/${datasets.scene_name}
+        images_root: ${datasets.data_root}/${datasets.scene_name}/image
+        masks_root: ${datasets.data_root}/${datasets.scene_name}/mask
+        pc_path: ${datasets.data_root}/${datasets.scene_name}/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        exclude_indices: [ 5, 7, 10, 14, 15, 20, 21, 25, 28, 30 ]
+      selection_count: ${datasets.selection_count}
+
+val:
+  - dataset_name: ${datasets.scene_name}_val
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/${datasets.scene_name}
+        images_root: ${datasets.data_root}/${datasets.scene_name}/image
+        masks_root: ${datasets.data_root}/${datasets.scene_name}/mask
+        pc_path: ${datasets.data_root}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.val_indices}
+        exclude_indices: ${datasets.holdout_indices}
+      selection_method: ""
+
+test:
+  - dataset_name: ${datasets.scene_name}_holdout
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/${datasets.scene_name}
+        images_root: ${datasets.data_root}/${datasets.scene_name}/image
+        masks_root: ${datasets.data_root}/${datasets.scene_name}/mask
+        pc_path: ${datasets.data_root}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.holdout_indices}
+        exclude_indices: ${datasets.val_indices}
+      selection_method: ""

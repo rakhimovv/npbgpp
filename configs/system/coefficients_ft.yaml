@@ -1,0 +1,64 @@
+system_class:
+  _target_: npbgplusplus.modeling.NPBG
+
+save_rendered_eval_images: true
+
+descriptors_pretrained_dir: ~  # initialize from here instead of just zeros
+descriptors_save_dir: ~
+
+max_scenes_per_train_epoch: 1
+max_points: 4e6
+descriptor_dim: 8
+bg_rgb_color: [ 1., 1., 1. ]  # is used only when use_masks=true (assume [0, 1] range)
+
+# if use_masks: true
+# 1) set target_img[~mask]=bg_rgb_color;
+# 2) if refiner outputs 4 channels (rgb + foreground) apply mask loss to the last channel
+use_masks: false
+
+freeze_refiner: false
+align_during_rendering: true
+loss_factors:
+  vgg_loss: 1e-7
+  l1_d1_loss: 0.00025
+  l1_d2_loss: 0.00010
+  l1_d4_loss: 0.00004
+  mask_loss: 0.00010
+  dimred_loss: 1e-7
+aggregator:
+  _target_: npbgplusplus.modeling.SphereAggregator
+  type: "learnable_v"
+  m: 6
+  tanh: false
+  depth: 1
+  width: 16
+  learnable_freq: false
+style_weight: 0.0
+style_img_path: ""
+
+rasterizer:
+  _target_: npbgplusplus.modeling.NearestScatterRasterizer
+  _convert_: all
+  descriptor_dim: ${system.descriptor_dim}
+  cat_mask: true  # concatenate visible mask as last channels
+  scales: [ 1.0, 0.5, 0.25, 0.125, 0.0625 ]
+  ss_scale: [ 1, 1, 1, 1, 1 ]  # super sampling scale
+  invert_mask_values: false
+  learnable: false
+
+refiner:
+  _target_: npbgplusplus.modeling.RefinerUnetV2
+  _convert_: all
+  in_channels: [ 9, 9, 9, 9, 9 ]  # descriptor_dim + 1 (add 1 because cat_mask: true)
+  out_channels: 3  # use 4 if want to predict foreground mask as last channels
+  filters: [ 16, 32, 48, 64, 80 ]
+  stem_conv_block_name: 'gated'
+  encoder_conv_block_name: 'gated'
+  decoder_conv_block_name: 'gated'
+  padding_mode: 'reflect'
+  use_skip: true
+
+postprocessing_transform: ~
+
+#postprocessing_transform:
+#  _target_: npbgplusplus.modeling.Rotate90CCW

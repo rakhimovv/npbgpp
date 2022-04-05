@@ -1,0 +1,48 @@
+system_class:
+  _target_: npbgplusplus.modeling.NPBGPlusPlus
+
+save_rendered_eval_images: true
+
+max_scenes_per_train_epoch: 4  # set it to 1 when finetuning
+descriptor_dim: 3
+bg_rgb_color: [ 1., 1., 1. ]  # is used only when use_masks=true (assume [0, 1] range)
+
+# if use_masks: true
+# 1) set target_img[~mask]=bg_rgb_color;
+# 2) if refiner outputs 4 channels (rgb + foreground) apply mask loss to the last channel
+use_masks: false
+
+freeze_refiner: false
+align_view_images: true
+align_during_rendering: true
+color_aug_p: 0.8
+visibility_scale: 1.0
+style_weight: 0.0
+style_img_path: "../../example/style.png"
+freeze_feature_extractor: false
+freeze_aggregator: false
+
+feature_extractor:
+  _target_: torch.nn.Identity
+
+aggregator:
+  _target_: npbgplusplus.modeling.MeanAggregator
+  weighted: true
+
+rasterizer:
+  _target_: npbgplusplus.modeling.NearestScatterRasterizer
+  _convert_: all
+  descriptor_dim: ${system.descriptor_dim}
+  cat_mask: true  # concatenate visible mask as last channels
+  scales: [ 1.0, 0.5, 0.25, 0.125, 0.0625 ]
+  ss_scale: [ 1, 1, 1, 1, 1 ]  # super sampling scale
+  invert_mask_values: false
+  learnable: false
+
+refiner:
+  _target_: npbgplusplus.modeling.IdentityRefiner
+
+postprocessing_transform: ~
+
+#postprocessing_transform:
+#  _target_: npbgplusplus.modeling.Rotate90CCW

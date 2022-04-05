@@ -1,0 +1,236 @@
+scene_class_name: npbgplusplus.data.DTUScene
+train_num_samples: 2000
+train_random_zoom: ~ # [ 0.5, 2.0 ]
+train_random_shift: true
+train_image_size: 256
+data_root: ../../data/DTU_masked
+val_indices: [ 5, 15, 25, 35, 45 ]
+holdout_indices: [ 7, 12, 17, 22, 27, 32, 37, 42, 47 ]
+cache_images: false
+selection_count: 3  # during train
+noise_sigma: ~
+n_point: ~
+pc_name: mvs_pc.ply
+
+train:
+  - dataset_name: scan37
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan37
+        images_root: ${datasets.data_root}/scan37/image
+        masks_root: ${datasets.data_root}/scan37/mask
+        pc_path: ${datasets.data_root}/scan37/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan40
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan40
+        images_root: ${datasets.data_root}/scan40/image
+        masks_root: ${datasets.data_root}/scan40/mask
+        pc_path: ${datasets.data_root}/scan40/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan55
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan55
+        images_root: ${datasets.data_root}/scan55/image
+        masks_root: ${datasets.data_root}/scan55/mask
+        pc_path: ${datasets.data_root}/scan55/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan63
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan63
+        images_root: ${datasets.data_root}/scan63/image
+        masks_root: ${datasets.data_root}/scan63/mask
+        pc_path: ${datasets.data_root}/scan63/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan65
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan65
+        images_root: ${datasets.data_root}/scan65/image
+        masks_root: ${datasets.data_root}/scan65/mask
+        pc_path: ${datasets.data_root}/scan65/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan69
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan69
+        images_root: ${datasets.data_root}/scan69/image
+        masks_root: ${datasets.data_root}/scan69/mask
+        pc_path: ${datasets.data_root}/scan69/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan83
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan83
+        images_root: ${datasets.data_root}/scan83/image
+        masks_root: ${datasets.data_root}/scan83/mask
+        pc_path: ${datasets.data_root}/scan83/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan97
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan97
+        images_root: ${datasets.data_root}/scan97/image
+        masks_root: ${datasets.data_root}/scan97/mask
+        pc_path: ${datasets.data_root}/scan97/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan105
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan105
+        images_root: ${datasets.data_root}/scan105/image
+        masks_root: ${datasets.data_root}/scan105/mask
+        pc_path: ${datasets.data_root}/scan105/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan106
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan106
+        images_root: ${datasets.data_root}/scan106/image
+        masks_root: ${datasets.data_root}/scan106/mask
+        pc_path: ${datasets.data_root}/scan106/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+  - dataset_name: scan122
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan122
+        images_root: ${datasets.data_root}/scan122/image
+        masks_root: ${datasets.data_root}/scan122/mask
+        pc_path: ${datasets.data_root}/scan122/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+
+val:
+  - dataset_name: scan97_val
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan97
+        images_root: ${datasets.data_root}/scan97/image
+        masks_root: ${datasets.data_root}/scan97/mask
+        pc_path: ${datasets.data_root}/scan97/${datasets.pc_name}
+        target_views_indices: ${datasets.val_indices}
+        exclude_indices: ${datasets.holdout_indices}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""
+
+test:
+  - dataset_name: scan97_holdout
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.data_root}/scan97
+        images_root: ${datasets.data_root}/scan97/image
+        masks_root: ${datasets.data_root}/scan97/mask
+        pc_path: ${datasets.data_root}/scan97/${datasets.pc_name}
+        target_views_indices: ${datasets.holdout_indices}
+        exclude_indices: ${datasets.val_indices}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""

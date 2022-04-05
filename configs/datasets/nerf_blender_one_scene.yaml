@@ -1,0 +1,94 @@
+scene_class_name: npbgplusplus.data.BlenderScene
+scene_name: chair
+train_num_samples: 2000
+train_random_zoom: ~ # [ 0.5, 2.0 ]
+train_random_shift: true
+train_image_size: 256
+data_root: ../../data/nerf_synthetic
+scene_subroot: ${datasets.data_root}
+images_subroot: ${datasets.data_root}
+val_indices:
+  _target_: numpy.arange
+  start: 100
+  stop: 200
+  step: 10
+holdout_indices:
+  _target_: numpy.arange
+  start: 200
+  stop: 400
+  step: 1
+cache_images: false
+selection_count: 3  # during train
+noise_sigma: ~
+n_point: ~
+white_bg: true
+pc_name: mvs_pc.ply
+
+train:
+  - dataset_name: ${datasets.scene_name}_finetune
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        num_samples: ${datasets.train_num_samples}
+        random_zoom: ${datasets.train_random_zoom}
+        random_shift: ${datasets.train_random_shift}
+        image_size: ${datasets.train_image_size}
+        white_bg: ${datasets.white_bg}
+        exclude_indices:
+          _target_: numpy.arange
+          start: 100
+          stop: 400
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_count: ${datasets.selection_count}
+
+val:
+  - dataset_name: ${datasets.scene_name}_val
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.val_indices}
+        exclude_indices:
+          _target_: numpy.setdiff1d
+          _args_:
+            - _target_: numpy.arange
+              start: 100
+              stop: 400
+            - ${datasets.val_indices}
+        white_bg: ${datasets.white_bg}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""
+
+test:
+  - dataset_name: ${datasets.scene_name}_holdout
+    dataset_class:
+      _target_: npbgplusplus.data.ViewSceneWrapper
+      scene_dataset:
+        _target_: ${datasets.scene_class_name}
+        _convert_: all
+        scene_root: ${datasets.scene_subroot}/${datasets.scene_name}
+        images_root: ${datasets.images_subroot}/${datasets.scene_name}
+        pc_path: ${datasets.scene_subroot}/${datasets.scene_name}/${datasets.pc_name}
+        target_views_indices: ${datasets.holdout_indices}
+        exclude_indices:
+          _target_: numpy.setdiff1d
+          _args_:
+            - _target_: numpy.arange
+              start: 100
+              stop: 400
+            - ${datasets.holdout_indices}
+        white_bg: ${datasets.white_bg}
+        noise_sigma: ${datasets.noise_sigma}
+        n_point: ${datasets.n_point}
+      selection_method: ""

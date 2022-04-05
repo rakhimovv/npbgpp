@@ -1,0 +1,79 @@
+system_class:
+  _target_: npbgplusplus.modeling.NPBGPlusPlus
+
+save_rendered_eval_images: true
+
+max_scenes_per_train_epoch: 4  # set it to 1 when finetuning
+descriptor_dim: 8
+bg_rgb_color: [ 1., 1., 1. ]  # is used only when use_masks=true (assume [0, 1] range)
+
+# if use_masks: true
+# 1) set target_img[~mask]=bg_rgb_color;
+# 2) if refiner outputs 4 channels (rgb + foreground) apply mask loss to the last channel
+use_masks: false
+
+freeze_refiner: false
+align_view_images: true
+align_during_rendering: true
+color_aug_p: 0.8
+visibility_scale: 1.0
+style_weight: 0.0
+style_img_path: "../../example/style.png"
+freeze_feature_extractor: false
+freeze_aggregator: false
+
+feature_extractor:
+  _target_: npbgplusplus.modeling.Unet
+  _convert_: all
+  encoder_name: spnasnet_100  # options here: https://github.com/rwightman/pytorch-image-models/blob/master/results/results-imagenet-real.csv
+  out_channels: 8
+  decoder_channels: [ 256, 128, 64, 32, 16 ]
+  decoder_layers: [ 1, 1, 1, 1, 1 ]
+  act_layer: # in decoder
+    _target_: hydra.utils.get_class
+    path: torch.nn.LeakyReLU
+  norm_layer: # in decoder
+    _target_: hydra.utils.get_class
+    path: torch.nn.Identity
+  upsample: bilinear
+  decoder_kernel_size: 3
+  pretrained_encoder: true
+  skip_rgb: true
+  append_rgb: false
+  eval_mode: true
+
+aggregator:
+  _target_: npbgplusplus.modeling.SphereAggregator
+  type: "learnable_v"
+  m: 6
+  tanh: false
+  depth: 1
+  width: 16
+  learnable_freq: false
+
+rasterizer:
+  _target_: npbgplusplus.modeling.NearestScatterRasterizer
+  _convert_: all
+  descriptor_dim: ${system.descriptor_dim}
+  cat_mask: true  # concatenate visible mask as last channels
+  scales: [ 1.0, 0.5, 0.25, 0.125, 0.0625 ]
+  ss_scale: [ 1, 1, 1, 1, 1 ]  # super sampling scale
+  invert_mask_values: false
+  learnable: false
+
+refiner:
+  _target_: npbgplusplus.modeling.RefinerUnetV2
+  _convert_: all
+  in_channels: [ 9, 9, 9, 9, 9 ]  # descriptor_dim + 1 (add 1 because cat_mask: true)
+  out_channels: 3  # use 4 if want to predict foreground mask as last channels
+  filters: [ 16, 32, 48, 64, 80 ]
+  stem_conv_block_name: 'gated'
+  encoder_conv_block_name: 'gated'
+  decoder_conv_block_name: 'gated'
+  padding_mode: 'reflect'
+  use_skip: true
+
+postprocessing_transform: ~
+
+#postprocessing_transform:
+#  _target_: npbgplusplus.modeling.Rotate90CCW
