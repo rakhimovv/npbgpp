@@ -11,7 +11,8 @@ We follow the PyTorch3D [_convention_](https://github.com/facebookresearch/pytor
 
 # Changelog
 
-- `[April 2022]` Initial code release
+- `[April 27, 2022]` Added more example data and point clouds
+- `[April 5, 2022]` Initial code release
 
 ## Dependencies
 
