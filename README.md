@@ -94,11 +94,13 @@ python train_net.py trainer.gpus=4 hydra.run.dir=experiments/npbg_dtu_nm_scan110
 If you find our work useful in your research, please consider citing:
 
 ```BibTeX
-@article{rakhimov2022npbg++,
-  title={NPBG++: Accelerating Neural Point-Based Graphics},
-  author={Rakhimov, Ruslan and Ardelean, Andrei-Timotei and Lempitsky, Victor and Burnaev, Evgeny},
-  journal={arXiv preprint arXiv:2203.13318},
-  year={2022}
+@InProceedings{Rakhimov_2022_CVPR,
+    author={Rakhimov, Ruslan and Ardelean, Andrei-Timotei and Lempitsky, Victor and Burnaev, Evgeny},
+    title={NPBG++: Accelerating Neural Point-Based Graphics},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month={June},
+    year={2022},
+    pages={15969-15979}
 }
 ```
 
