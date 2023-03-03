@@ -27,8 +27,8 @@ tar xzf 1.10.0.tar.gz
 export CUB_HOME=$PWD/cub-1.10.0
 pip install "git+https://github.com/facebookresearch/pytorch3d.git@d0ca3b9e0cf6b1cfba46a367a98b8738cc5acad5" --no-cache-dir --verbose
 
-# install torch_scatter (2.0.8)
-pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.9.1+${CUDA}.html
+# install torch_scatter
+pip install torch-scatter==2.0.8 -f https://pytorch-geometric.com/whl/torch-1.9.1+${CUDA}.html
 # where ${CUDA} should be replaced by either cpu, cu101, cu102, or cu111 depending on your PyTorch installation.
 # {CUDA} must match with torch.version.cuda (not with runtime or driver version)
 # using 1.7.1 instead of 1.7.0 produces "incompatible cuda version" error

@@ -27,7 +27,6 @@ setup(name='npbgplusplus',
       description='npbgplusplus',
       author='npbgpp',
       author_email='',
-      url=url,
       install_requires=install_requires,
       packages=find_packages()
       )
