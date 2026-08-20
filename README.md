@@ -1,6 +1,17 @@
 # \[CVPR 2022\] NPBG++: Accelerating Neural Point-Based Graphics
 ### [Project Page](https://rakhimovv.github.io/npbgpp) | [Paper](https://arxiv.org/pdf/2203.13318.pdf)
 
+> **Status: archived research code.** This is the official implementation for the CVPR 2022 paper
+> and has not been maintained since 2023. Dependencies are pinned to PyTorch 1.9.1 and a 2021
+> PyTorch3D commit; it is not expected to install on a modern CUDA toolchain or Python >= 3.11.
+> Treat it as a reference implementation.
+>
+> **Pretrained checkpoints are not covered by this repository's MIT license.** They are distributed
+> separately via Yandex Disk and were trained on ScanNet, DTU and H3DS, whose terms are
+> research-only and require agreements with the respective dataset owners. The MIT grant here
+> applies to the source code only.
+
+
 This repository contains the official Python implementation of the paper.
 
 The repository also contains faithful implementation of [_NPBG_]().
