@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "NPBG++: Accelerating Neural Point-Based Graphics"
+authors:
+  - family-names: Rakhimov
+    given-names: Ruslan
+  - family-names: Ardelean
+    given-names: Andrei-Timotei
+  - family-names: Lempitsky
+    given-names: Victor
+  - family-names: Burnaev
+    given-names: Evgeny
+repository-code: "https://github.com/rakhimovv/npbgpp"
+url: "https://rakhimovv.github.io/npbgpp"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "NPBG++: Accelerating Neural Point-Based Graphics"
+  authors:
+    - family-names: Rakhimov
+      given-names: Ruslan
+    - family-names: Ardelean
+      given-names: Andrei-Timotei
+    - family-names: Lempitsky
+      given-names: Victor
+    - family-names: Burnaev
+      given-names: Evgeny
+  collection-title: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)"
+  year: 2022
+  month: 6
+  start: 15969
+  end: 15979
