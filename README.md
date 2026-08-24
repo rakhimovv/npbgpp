@@ -10,6 +10,14 @@
 > separately via Yandex Disk and were trained on ScanNet, DTU and H3DS, whose terms are
 > research-only and require agreements with the respective dataset owners. The MIT grant here
 > applies to the source code only.
+>
+> **Current work.** 3D reconstruction and neural rendering are an earlier line of work for me.
+> I now work on embodied AI — world models and VLA policies for robots and virtual worlds — with
+> [corl-team](https://github.com/corl-team). Recent code:
+> [NE-Dreamer](https://github.com/corl-team/nedreamer),
+> [Qantara](https://github.com/corl-team/qantara),
+> [VL-DAC](https://github.com/corl-team/VL-DAC).
+> More at [rakhimovv.github.io](https://rakhimovv.github.io).
 
 
 This repository contains the official Python implementation of the paper.
